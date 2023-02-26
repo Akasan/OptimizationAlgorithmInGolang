@@ -6,12 +6,11 @@ import (
 )
 
 func main() {
-	a := agent.Agent{
-		Id:     1,
-		Length: 0,
+	colony := agent.Colony{ColonySize: 10}
+	colony.Initialize()
+
+	for i, a := range colony.Agents {
+		fmt.Println(i)
+		fmt.Println(a)
 	}
-	a.AddLength(100)
-	a.ResetLength()
-	a.SetCity(1)
-	fmt.Println(a)
 }
