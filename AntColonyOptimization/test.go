@@ -2,6 +2,7 @@ package main
 
 import (
 	"AntColonyOptimization/modules/agent"
+	file "AntColonyOptimization/modules/file"
 	"fmt"
 )
 
@@ -17,4 +18,5 @@ func main() {
 	pheromone.Reduce()
 	colony.Initialize()
 	fmt.Println(pheromone.Pheromone)
+	file.LoadCityFile("./data/kroA100.tsp")
 }
