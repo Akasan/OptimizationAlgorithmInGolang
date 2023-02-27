@@ -7,27 +7,23 @@ import (
 )
 
 
-type ReduceRate float32
-type PheromoneType float32
-type CitySize int
-
 type PheromoneInteface interface {
-  Init(PheromoneType)
+  Init(float32)
   Reduce()
-  AddPheromone(int, int, PheromoneType)
+  AddPheromone(int, int, float32)
 }
 
 
 type Pheromone struct {
-  ReduceRate ReduceRate
-  CitySize CitySize
-  Pheromone [][]PheromoneType 
+  ReduceRate float32
+  CitySize int
+  Pheromone [][]float32 
 }
 
 
-func (p *Pheromone) Init(initialPheromone PheromoneType){
-  for i := 0; i<int(p.CitySize)-1; i++{
-    p.Pheromone = append(p.Pheromone, make([]PheromoneType, int(p.CitySize)-i-1))
+func (p *Pheromone) Init(initialPheromone float32){
+  for i := 0; i<p.CitySize-1; i++{
+    p.Pheromone = append(p.Pheromone, make([]float32, p.CitySize-i-1))
   }
 
   for idx1, val := range p.Pheromone{
@@ -40,7 +36,7 @@ func (p *Pheromone) Init(initialPheromone PheromoneType){
 func (p *Pheromone) Reduce(){
   for idx1, val := range p.Pheromone{
     for idx2, _ := range val{
-      p.Pheromone[idx1][idx2] *= PheromoneType(p.ReduceRate)
+      p.Pheromone[idx1][idx2] *= p.ReduceRate
     }
   }
 }
@@ -62,7 +58,7 @@ func isInvalidCityPair(c1 int, c2 int) error {
 }
 
 
-func (p *Pheromone) AddPheromone(c1 int, c2 int, additionalPheromone PheromoneType){
+func (p *Pheromone) AddPheromone(c1 int, c2 int, additionalPheromone float32){
   cityPairErr := isInvalidCityPair(c1, c2)
   if cityPairErr != nil{
     fmt.Println(cityPairErr)
