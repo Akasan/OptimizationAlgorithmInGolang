@@ -30,18 +30,17 @@ func (p *Pheromone) Init(initialPheromone PheromoneType){
     p.Pheromone = append(p.Pheromone, make([]PheromoneType, int(p.CitySize)-i-1))
   }
 
-  for i := 0; i<int(p.CitySize)-1; i++{
-    for j := 0; j<int(p.CitySize)-i-1; j++{
-      p.Pheromone[i][j] = initialPheromone
+  for idx1, val := range p.Pheromone{
+    for idx2, _ := range val{
+      p.Pheromone[idx1][idx2] = initialPheromone
     }
   }
 }
 
-
 func (p *Pheromone) Reduce(){
-  for i := 0; i<int(p.CitySize)-1; i++{
-    for j := i+1; j<int(p.CitySize)-i; j++{
-      p.Pheromone[i][j] = p.Pheromone[i][j] * PheromoneType(p.ReduceRate)
+  for idx1, val := range p.Pheromone{
+    for idx2, _ := range val{
+      p.Pheromone[idx1][idx2] *= PheromoneType(p.ReduceRate)
     }
   }
 }
