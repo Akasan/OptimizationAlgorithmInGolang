@@ -6,7 +6,9 @@ import (
 )
 
 func main() {
-	colony := agent.Colony{ColonySize: 10}
+	colony := agent.Colony{
+		ColonySize: 10,
+	}
 	pheromone := agent.Pheromone{
 		ReduceRate: 0.99,
 		CitySize:   10,
